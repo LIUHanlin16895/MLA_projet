@@ -34,15 +34,18 @@ maximizes the loss. This new image is called the adversarial image.
 
 We create adversarial examples by taking the gradient of the network with respect to the input image.
 ```
+loss_object = tf.keras.losses.SparseCategoricalCrossentropy()
+
 def create_adversarial_pattern(input_image, input_label):
-    loss_object = tf.keras.losses.CategoricalCrossentropy()
-    with tf.GradientTape() as tape:
-        tape.watch(input_image)
-        prediction = probability_model(input_image)
-        loss = loss_object(input_label, prediction)
-    gradient = tape.gradient(loss, input_image)
-    signed_grad = tf.sign(gradient)
-    return signed_grad
+  with tf.GradientTape() as tape:
+    tape.watch(input_image)
+    prediction = model(input_image)
+    loss = loss_object(input_label, prediction)
+  gradient = tape.gradient(loss, input_image)
+  # Utiliser la fonction signe sur le gradient pour créer une perturbation
+  signed_grad = tf.sign(gradient)
+  return signed_grad
+  
 ```
 tape.gradient(loss, input_image) does the deriviation computation.
 
