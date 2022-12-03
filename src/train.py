@@ -46,7 +46,16 @@ def loss_with_FGSM(model,input_image, input_label, epsilon=1, alpha=0.5):
     prediction2 = model(adv_img)
     loss2 = loss_object(input_label, prediction2)
     return alpha*loss + (1-alpha) * loss2
-
+loss_object = tf.keras.losses.SparseCategoricalCrossentropy()
+def create_adversarial_pattern(input_image, input_label):
+  with tf.GradientTape() as tape:
+    tape.watch(input_image)
+    prediction = model(input_image)
+    loss = loss_object(input_label, prediction)
+  gradient = tape.gradient(loss, input_image)
+  # Utiliser la fonction signe sur le gradient pour créer une perturbation对梯度使用sign函数，创建扰动
+  signed_grad = tf.sign(gradient)
+  return signed_grad
 
 
 def training_loop(model, epochs, optimizer, learning_rate, loss_fn, train_set, val_images, val_labels, nombre_example=60000, batchsize=128):
@@ -73,7 +82,7 @@ def training_loop(model, epochs, optimizer, learning_rate, loss_fn, train_set, v
 			grads = tape.gradient(loss_value, model.trainable_weights)
 			optimizer.apply_gradients(zip(grads, model.trainable_weights))
 			if step == len-1:
-				logits_val = model(val_images, training=True)
+				logits_val = model(val_images)
 				logits_val = np.argmax(logits_val, axis=-1)
 				m = tf.keras.metrics.Accuracy()
 				m.update_state(val_labels, logits_val)
@@ -87,4 +96,36 @@ def training_loop(model, epochs, optimizer, learning_rate, loss_fn, train_set, v
 	return model
 
 maxout = create_amxout()
-model = training_loop(maxout, epochs=10, optimizer=optimizer, learning_rate=0.001, loss_fn=loss_func, train_set=dataset, val_images=test_image, val_labels=test_labels, nombre_example=60000, batchsize=128)
+model = training_loop(maxout, epochs=50, optimizer=optimizer, learning_rate=0.001, loss_fn=loss_func, train_set=dataset, val_images=test_image, val_labels=test_labels, nombre_example=60000, batchsize=128)
+
+perturbations = create_adversarial_pattern(test_image, test_labels)
+epsilons = [0,0.05,0.10,0.15,0.20,0.25,0.30,0.50,0.7,1]#
+adv_acc_list = []
+for i, eps in enumerate(epsilons):
+  print("epsilons = {}:".format(eps))
+  # Obtenir le résultat de la prédiction de l'image d'origine 获取原始图片的预测结果
+  test_image = tf.clip_by_value(test_image, -1, 1)
+  predict_label = model.predict(test_image)
+  predict_label = np.argmax(predict_label, axis=-1)
+  # Générer des adversarial pattern et obtenir des résultats de prédiction 生成对抗样本，并获取预测结果
+  adv_image = test_image + eps*perturbations
+  adv_image = tf.clip_by_value(adv_image, -1, 1)
+  adv_predict_label = model.predict(adv_image)
+  adv_predict_label = np.argmax(adv_predict_label, axis=-1)
+  print(adv_predict_label.shape)
+  print(test_labels.shape)
+  # Évaluer le modèle sur un ensemble d'exemples adversarial 在对抗样本集合中评估模型
+  m = tf.keras.metrics.Accuracy()
+  m.update_state( test_labels,adv_predict_label)
+  adv_acc_list.append(m.result().numpy())
+
+plt.figure()
+plt.plot(epsilons,adv_acc_list,label='acc_model_adv')
+plt.title("The Accuracy of Adversarial Samples")
+plt.xlabel("epsilons")
+plt.ylabel("acc")
+plt.legend()
+plt.grid()
+plt.show()
+print('acc',adv_acc_list)
+print('epsilons',epsilons)

@@ -1,5 +1,9 @@
 import tensorflow as tf
 import numpy as np
+from keras.models import Sequential
+from keras.layers import Dense,Activation,Conv2D
+from keras.layers import MaxPool2D,Flatten,Dropout,ZeroPadding2D,BatchNormalization
+from keras.utils import np_utils
 
 def max_out(inputs, num_units, axis=None):
     shape = inputs.get_shape().as_list()
@@ -16,7 +20,7 @@ def max_out(inputs, num_units, axis=None):
     outputs = tf.reduce_max(tf.reshape(inputs, shape), -1, keepdims=False)
     return outputs
 
-def create_amxout():
+def createMaxout():
         # Build model
     inputs = tf.keras.Input(shape=(28, 28, 1))
     x = tf.keras.layers.Flatten()(inputs)
@@ -31,3 +35,35 @@ def create_amxout():
     model = tf.keras.Model(inputs, outputs)
     model.summary()
     return model
+
+def createCNN():
+    pool_size = (2,2)
+
+    CNN = Sequential()
+
+    CNN.add(Conv2D(32,kernel_size=(3,3),strides=(1,1),input_shape=(28,28,1)))
+    CNN.add(Activation('relu'))
+    CNN.add(MaxPool2D(pool_size=pool_size))
+
+    CNN.add(ZeroPadding2D((1,1)))
+    CNN.add(Conv2D(48,kernel_size=(3,3)))
+    CNN.add(Activation('relu'))
+    CNN.add(BatchNormalization(epsilon=1e-6,axis=1))
+    CNN.add(MaxPool2D(pool_size=pool_size))
+
+    CNN.add(ZeroPadding2D((1,1)))
+    CNN.add(Conv2D(64,kernel_size=(2,2)))
+    CNN.add(Activation('relu'))
+    CNN.add(BatchNormalization(epsilon=1e-6,axis=1))
+    CNN.add(MaxPool2D(pool_size = pool_size))
+
+    CNN.add(Dropout(0.25))
+    CNN.add(Flatten())
+
+    CNN.add(Dense(3168))
+    CNN.add(Activation('relu'))
+
+    CNN.add(Dense(10))
+    CNN.add(Activation('softmax'))
+    CNN.summary()
+    return CNN
