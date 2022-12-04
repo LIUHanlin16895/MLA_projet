@@ -19,12 +19,11 @@ In this project, we will try to apply the FGSM method on various neural networks
 * ImageNet
 ## Fast Gradient Sign Method 
 
-[Explaining and Harnessing Adversarial Examples](https://arxiv.org/abs/1412.6572) paper describes a new way of attacking networks called Fast Gradient Sign Method (FGSM).
+[Explaining and Harnessing Adversarial Examples](https://arxiv.org/abs/1412.6572) describes a new way of attacking networks: Fast Gradient Sign Method (FGSM).
 
-Adversarial examples are specific inputs created with the purpose of fooling a neural network. They are formed by applying small perturbations to examples from the dataset, such that the 
-perturbed input results in the model outputting an incorrect answer with high confidence. These examples are indistinguishable to the human eye.
+Researchers have identified a serious security concern with existing neural network models : an attacker can easily fool a neural network by adding specific noise to benign samples, often undetected. The attacker uses perturbations that are not perceptible to human vision/audition, which are sufficient to cause a normally trained model to output false predictions with high confidence, a phenomenon that researchers call adversarial attacks.
 
-FGSM is a white box attack whose goal is to ensure misclassification. A white box attack is where the attacker has complete access to the model being attacked.
+Existing adversarial attacks can be classified as white-box, grey-box and black-box attacks based on the threat model. The difference between these three models lies in the information known to the attacker, and the FGSM approach is a white-box attack in which the threat model assumes that the attacker has complete knowledge of his target model, including the model architecture and parameters. The attacker can therefore create an adversarial sample directly on the target model by any means. The attacker can therefore create an adversarial sample directly on the target model by any means
 
 The fast gradient sign method works by using the gradients of the neural network to create an adversarial example. 
 For an input image, the method uses the gradients of the loss with respect to the input image to create a new image that 
@@ -40,8 +39,8 @@ def create_adversarial_pattern(input_image, input_label):
     prediction = model(input_image)
     loss = loss_object(input_label, prediction)
   gradient = tape.gradient(loss, input_image)
-  # Utiliser la fonction signe sur le gradient pour créer une perturbation
   signed_grad = tf.sign(gradient)
+  
   return signed_grad
   
 ```
@@ -49,19 +48,21 @@ tape.gradient(loss, input_image) does the deriviation computation.
 
 ## Adversarial examples and different neural networks
 
-In the following network, we will first use the FGSM method to generate adversarial examples and observe the impact of adversarial examples on the neural network. We then continue to train the network using data containing adversarial examples until it is fully resistant to adversarial example attacks.
+In the following network, we will first use the FGSM method to generate adversarial examples and observe the impact of adversarial examples on the neural network.  In the article, the authors propose adversarial training methods based on reminders from linear models as well as deep networks, respectively, and we will implement each of these two defences into the following networks and observe their effects.
 
   **Linear Classification Network**
+    - Logistic regression
+    - Softmax neural network
+    
+    In this network, we will...
+    
+  **Deep Neural Network**
+    - GoogLeNet (Experiment in progress)
+    - Maxout network ()
+    - CNN ([notebook-CNN-DNN](src)) (Experiment in progress)
+    
+     In this network, we will...
 
-In this network, we will...
-
-  **Maxout network**
-
-In this network, we will...
-
-  **Deep Neural Network - CNN**  ([notebook-CNN-DNN](src))
-
-In this network, we will...
 
 ## Reference
 
