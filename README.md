@@ -52,19 +52,24 @@ tape.gradient(loss, input_image) does the deriviation computation.
 ## Adversarial examples and different neural networks
 
 In the following network, we will first use the FGSM method to generate adversarial examples and observe the impact of adversarial examples on the neural network.  In the article, the authors propose adversarial training methods based on reminders from linear models as well as deep networks, respectively, and we will implement each of these two defences into the following networks and observe their effects.
-
+  * Existence of adversarial examples
+  
+  1. GoogLeNet([GoogLeNet_existence_adv_examples](/src/existence_adv/)) and ([GoogLeNet_examples](/src/GoogLeNet/)) 
+  2. Softmax ([Softmax](/src/existence_adv/)) 
+  
   * Linear Classification Network
   
-  1. Logistic regression (Experiment in progress)
-  2. Softmax neural network (Experiment in progress)
+  1. Logistic regression ([ProjetMLAlogisticRegression_test1](/src/logistic_regression/)) to be continue...
+  2. Softmax neural network ([ProjetMLA_softmax_training](/src/softmax/)) 
+   
     
   In this network, we will...
     
   * Deep Neural Network
   
-  1. GoogLeNet (Experiment in progress)
-  2. Maxout network (Complete)
-  3. CNN ([notebook-CNN-DNN](src)) (Experiment in progress)
+  1. Maxout network ([ProjetMLAmaxoutFGSM](/src/maxout/))
+  2. CNN with Softmax ([ProjetMLAsoftmax_cnnFGSM](/src/softmax/)) to be continue...
+  3. GoogLeNet to be continue...
     
   In this network, we will...
 
