@@ -1,5 +1,6 @@
 * The project is still in progress and the completed neural networks will be implemented into .py format files, while the neural networks being experimented with will be experimented with in .jupyter format files.
 
+* to do: 
 
 # MLA_projet
 Reproduce the results of the article "Explaining and Harnessing Adversarial Examples". 
