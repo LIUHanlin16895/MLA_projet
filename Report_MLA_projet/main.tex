@@ -1,0 +1,91 @@
+\documentclass{article}
+
+\usepackage{jmlr2e}
+\usepackage{natbib}
+\usepackage{hyperref}
+\usepackage{amssymb,amsmath,epsfig}
+\usepackage{caption}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage{lipsum}
+\sloppy
+
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\editor{Machine Learning Avancé (2021-2022)}
+
+\begin{document}
+
+\title{Reproduce the results of the article "Explaining and Harnessing Adversarial Examples"}
+
+%% Group authors per affiliation:
+
+\author{\name JIANG Chenao #1 \email chenao.jiang@etu.sorbonne-universite.fr \\
+       \addr Master Ingénierie des Systèmes Intelligents \\
+       Sorbonne Université\\
+       Paris, France
+       \AND
+\name LIU Hanlin #2 \email hanlin.liu@etu.sorbonne-universite.fr \\
+       \addr Master Systèmes Avancés et Robotiques \\
+       Sorbonne Université\\
+       Paris, France
+       \AND
+\name Chen Yuwang #3 \email yuwang.chen@etu.sorbonne-universite.fr \\
+       \addr Master Ingénierie des Systèmes Intelligents \\
+       Sorbonne Université\\
+       Paris, France
+       \AND
+\name WANG Haoyu #4 \email haoyu.wang@etu.sorbonne-universite.fr \\
+       \addr Master Systèmes Avancés et Robotiques \\
+       Sorbonne Université\\
+       Paris, France}
+\maketitle
+
+% Abstract section
+\input{abstract}
+
+% INTRO section
+\section{Introduction}
+\label{sec:intro}
+\input{intro}
+
+% METHODE section
+\section{Presentation of the algorithm}
+\label{sec:methode}
+\input{methode}
+
+% DATA section
+\section{Données}
+\label{sec:data}
+\input{data}
+
+% EXPERIMENT section
+\section{Evaluation expérimentale}
+\label{sec:experimence}
+\input{experiences}
+
+% CONCLUSION section
+\section{Conclusion}
+\label{sec:conclusion}
+\input{conclusion}
+
+% BIBLIO section
+\section{Bibliographie}
+
+
+Ian Goodfellow, David Warde-Farley, Mehdi Mirza, Aaron Courville, and Yoshua Bengio. Maxout networks. 28(3) :1319–1327, 17–19 Jun 2013.
+
+Ian J Goodfellow, Jonathon Shlens, and Christian Szegedy. Explaining and harnessing adversarial examples. arXiv preprint arXiv :1412.6572, 2014.
+
+Christian Szegedy, Wojciech Zaremba, Ilya Sutskever, Joan Bruna, Dumitru Erhan, Ian Goodfellow, and Rob Fergus. Intriguing properties of neural networks. arXiv preprint arXiv :1312.6199, 2013
+
+Kui Ren, Tianhang Zheng, Zhan Qin, Xue Liu.Adversarial Attacks and Defenses in Deep Learning[J].Engineering,2020,6(3):346-360.
+
+LIU Ximeng. Adversarial attacks and defenses in deep learning. Chinese Journal of Network and Information Security[J], 2020, 6(5): 36-53 doi:10.11959/j.issn.2096-109x.2020071
+
+
+
+\bibliography{biblio}
+
+\end{document}
+
