@@ -66,7 +66,7 @@ In the following network, we will first use the FGSM method to generate adversar
   2. Softmax neural network ([ProjetMLA_softmax_training](/src/softmax/)) 
    
     
-  In this network, we will...
+  In these two linear neural networks, we use two methods for adversarial training, the first one is to analyze its loss function and use a method similar to norm1 regularization for adversarial training, and the second one is to use adversarial examples for training.
     
   * Deep Neural Network
   
