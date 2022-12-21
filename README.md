@@ -52,11 +52,10 @@ In the following network, we will first use the FGSM method to generate adversar
   * Existence of adversarial examples
   
   1. GoogLeNet([GoogLeNet_existence_adv_examples](/src/existence_adv/)) and ([GoogLeNet_examples](/src/GoogLeNet/)) 
-  2. Softmax ([Softmax](/src/existence_adv/)) 
   
   * Linear Classification Network
   
-  1. Logistic regression ([ProjetMLAlogisticRegression_test1](/src/logistic_regression/)) to be continue...
+  1. Logistic regression ([ProjetMLAlogisticRegression_test1](/src/logistic_regression/)) 
   2. Softmax neural network ([ProjetMLA_softmax_training](/src/softmax/)) 
    
     
@@ -65,9 +64,7 @@ In the following network, we will first use the FGSM method to generate adversar
   * Deep Neural Network
   
   1. Maxout network ([ProjetMLAmaxoutFGSM](/src/maxout/))
-  3. GoogLeNet to be continue...
     
-  In this network, we will...
 
 
 ## Reference
