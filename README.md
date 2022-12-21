@@ -55,7 +55,7 @@ In the following network, we will first use the FGSM method to generate adversar
   
   * Linear Classification Network
   
-  1. Logistic regression ([ProjetMLAlogisticRegression_test1](/src/logistic_regression/)) 
+  1. Logistic regression ([ProjetMLA_logisticRegression](/src/logistic_regression/)) 
   2. Softmax neural network ([ProjetMLA_softmax_training](/src/softmax/)) 
    
     
