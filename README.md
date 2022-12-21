@@ -51,7 +51,7 @@ tape.gradient(loss, input_image) does the deriviation computation.
 In the following network, we will first use the FGSM method to generate adversarial examples and observe the impact of adversarial examples on the neural network.  In the article, the authors propose adversarial training methods based on reminders from linear models as well as deep networks, respectively, and we will implement each of these two defences into the following networks and observe their effects.
   * Existence of adversarial examples
   
-  1. GoogLeNet([GoogLeNet_existence_adv_examples](/src/existence_adv/)) and ([GoogLeNet_examples](/src/GoogLeNet/)) 
+  1. GoogLeNet([GoogLeNet_existence_adv_examples](/src/existence_adv/)) and ([GoogLeNet_examples](/src/Tiny_ImageNet/)) 
   
   * Linear Classification Network
   
